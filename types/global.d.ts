@@ -71,6 +71,12 @@ declare global {
         id: string;
         name: string;
         email: string;
+        createdAt?: Date;
+        updatedAt?: Date;
+        country?: string;
+        investmentGoals?: string;
+        riskTolerance?: string;
+        preferredIndustry?: string;
     };
 
     type Stock = {
@@ -114,6 +120,11 @@ declare global {
     type QuoteData = {
         c?: number;
         dp?: number;
+        h?: number;
+        l?: number;
+        o?: number;
+        pc?: number;
+        t?: number;
     };
 
     type ProfileData = {
