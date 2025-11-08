@@ -1,11 +1,16 @@
 import DashboardCard from "@/components/DashboardCard";
+import TickerTape from "@/components/widgets/TickerTape";
+import Hotlists from "@/components/widgets/Hotlists";
 import { Newspaper, TrendingUp, BarChart3, Bell } from "lucide-react";
 
 const Home = () => {
     return (
         <div className="min-h-screen p-6 md:p-8">
             <div className="max-w-7xl mx-auto">
-                {/* Hero Section */}
+                <div className="mb-8 -mx-6 md:-mx-8">
+                    <TickerTape />
+                </div>
+
                 <div className="mb-12">
                     <h1 className="text-4xl md:text-5xl font-bold text-gray-100 mb-4">
                         Welcome to OpenStock
@@ -71,12 +76,19 @@ const Home = () => {
                         />
                         
                         <DashboardCard
-                            title="Stock Search"
-                            description="Search and track your favorite stocks with detailed company information."
-                            href="/search"
+                            title="Stock Screener"
+                            description="Filter and discover stocks, forex, and cryptocurrencies based on your criteria."
+                            href="/screener"
                             icon={TrendingUp}
                             iconColor="text-yellow-400"
                         />
+                    </div>
+                </div>
+
+                <div className="mb-8">
+                    <h2 className="text-2xl font-bold text-gray-100 mb-6">Market Hotlists</h2>
+                    <div className="bg-gray-800 rounded-lg overflow-hidden">
+                        <Hotlists />
                     </div>
                 </div>
 

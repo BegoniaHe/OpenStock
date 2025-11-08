@@ -6,6 +6,8 @@ import {
 } from "@/lib/constants";
 import { API_CONFIG, WIDGET_TYPES } from "@/lib/config";
 
+import TickerTape from '@/components/widgets/TickerTape';
+
 export default function MarketPage() {
     return (
         <div className="min-h-screen p-6 md:p-8">
@@ -13,6 +15,10 @@ export default function MarketPage() {
                 <div className="mb-8">
                     <h1 className="text-4xl font-bold text-gray-100 mb-2">Market Overview</h1>
                     <p className="text-gray-400">Real-time market data, analysis, and comprehensive insights</p>
+                </div>
+
+                <div className="mb-6 -mx-6 md:-mx-8">
+                    <TickerTape />
                 </div>
 
                 <div className="space-y-6">

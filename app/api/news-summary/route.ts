@@ -8,9 +8,10 @@ import { logger } from '@/lib/logger';
 import { AuthenticationError, formatErrorResponse } from '@/lib/errors';
 import { UI_CONFIG } from '@/lib/config';
 import { NewsSummaryModel } from '@/database/models/news-summary.model';
+import { UserSettingsModel } from '@/database/models/user-settings.model';
 import { connectToDatabase } from '@/database/mongoose';
 
-const NEWS_SUMMARY_PROMPT = `You are a financial news analyst. Generate a concise, easy-to-understand summary of the following market news articles.
+const DEFAULT_NEWS_SUMMARY_PROMPT = `You are a financial news analyst. Generate a concise, easy-to-understand summary of the following market news articles.
 
 Format your response in simple HTML with the following structure:
 - Use <h3> for section headings
@@ -20,6 +21,8 @@ Format your response in simple HTML with the following structure:
 - Keep language simple and accessible to non-experts
 - Focus on what matters to individual investors
 - Limit to 3-4 key highlights
+
+IMPORTANT: Output ONLY the HTML content, without any markdown code blocks or backticks.
 
 News data:
 {{newsData}}
@@ -112,7 +115,19 @@ export async function GET(request: NextRequest) {
             });
         }
 
-        const prompt = NEWS_SUMMARY_PROMPT.replace(
+        // 获取用户自定义的提示词
+        let userPrompt = DEFAULT_NEWS_SUMMARY_PROMPT;
+        try {
+            const userSettings = await UserSettingsModel.findOne({ userId: userEmail });
+            if (userSettings?.newsSummaryPrompt) {
+                userPrompt = userSettings.newsSummaryPrompt;
+                logger.info('Using custom user prompt', { email: userEmail });
+            }
+        } catch (settingsError) {
+            logger.warn('Failed to get user settings, using default prompt');
+        }
+
+        const prompt = userPrompt.replace(
             '{{newsData}}',
             JSON.stringify(articles, null, 2)
         );

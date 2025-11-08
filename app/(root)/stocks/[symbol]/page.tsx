@@ -1,9 +1,9 @@
 import TradingViewWidget from "@/components/TradingViewWidget";
+import AdvancedChart from "@/components/widgets/AdvancedChart";
+import TopStories from "@/components/widgets/TopStories";
 import WatchlistButton from "@/components/WatchlistButton";
 import {
     SYMBOL_INFO_WIDGET_CONFIG,
-    CANDLE_CHART_WIDGET_CONFIG,
-    BASELINE_WIDGET_CONFIG,
     TECHNICAL_ANALYSIS_WIDGET_CONFIG,
     COMPANY_PROFILE_WIDGET_CONFIG,
     COMPANY_FINANCIALS_WIDGET_CONFIG,
@@ -24,19 +24,14 @@ export default async function StockDetails({ params }: StockDetailsPageProps) {
                         height={170}
                     />
 
-                    <TradingViewWidget
-                        scriptUrl={`${scriptUrl}advanced-chart.js`}
-                        config={CANDLE_CHART_WIDGET_CONFIG(symbol)}
-                        className="custom-chart"
-                        height={600}
-                    />
+                    <div className="bg-gray-800 rounded-lg overflow-hidden">
+                        <AdvancedChart symbol={`NASDAQ:${symbol}`} />
+                    </div>
 
-                    <TradingViewWidget
-                        scriptUrl={`${scriptUrl}advanced-chart.js`}
-                        config={BASELINE_WIDGET_CONFIG(symbol)}
-                        className="custom-chart"
-                        height={600}
-                    />
+                    <div className="bg-gray-800 rounded-lg overflow-hidden">
+                        <h3 className="text-xl font-semibold text-gray-100 p-4 border-b border-gray-700">Related News</h3>
+                        <TopStories symbol={symbol} />
+                    </div>
                 </div>
 
                 {/* Right column */}

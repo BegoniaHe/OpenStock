@@ -1,9 +1,12 @@
 export const NAV_ITEMS = [
     { href: '/', label: 'Dashboard' },
-    { href: '/news', label: 'News' },
     { href: '/market', label: 'Market' },
-    { href: '/search', label: 'Search' },
-    // { href: '/watchlist', label: 'Watchlist' },
+    { href: '/screener', label: 'Screener' },
+    { href: '/crypto', label: 'Crypto' },
+    { href: '/forex', label: 'Forex' },
+    { href: '/calendar', label: 'Calendar' },
+    { href: '/news', label: 'News' },
+    { href: '/settings', label: 'Settings' },
 ];
 
 // Sign-up form select options
